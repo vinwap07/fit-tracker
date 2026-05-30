@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitTracker — Новая тренировка</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">FitTracker</div>
+        <div class="navbar-links">
+            <a href="profile.html">Профиль</a>
+            <a href="exercises.html">Каталог</a>
+            <a href="create-workout.html" class="active">Добавить тренировку</a>
+            <a href="propose-exercise.html">Предложить упражнение</a>
+            <a href="my-proposals.html">Мои заявки</a>
+            <a href="moderation.html" id="mod-link" style="display:none;">Модерация</a>
+            <a href="#" id="logout-btn">Выход</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="page-title">Новая тренировка</h1>
+        <p class="page-subtitle">Заполните данные о тренировке и добавьте упражнения</p>
+
+        <div id="alert" class="alert alert-error"></div>
+        <div id="success-alert" class="alert alert-success"></div>
+
+        <form id="workout-form">
+            <div class="card" style="margin-bottom:24px;">
+                <h3 class="card-title">Общая информация</h3>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label" for="workout-date">Дата тренировки</label>
+                        <input type="datetime-local" id="workout-date" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="workout-duration">Длительность (ЧЧ:ММ:СС)</label>
+                        <input type="text" id="workout-duration" class="form-input" placeholder="01:30:00" required pattern="\d{2}:\d{2}:\d{2}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-bottom:24px;">
+                <h3 class="card-title">Упражнения</h3>
+
+                <div id="exercises-list"></div>
+
+                <button type="button" class="btn btn-secondary" id="add-exercise-btn" style="margin-top:16px;">+ Добавить упражнение</button>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Сохранить тренировку</button>
+        </form>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/create-workout.js"></script>
+</body>
+</html>

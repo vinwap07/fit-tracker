@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitTracker — Мои заявки</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">FitTracker</div>
+        <div class="navbar-links">
+            <a href="profile.html">Профиль</a>
+            <a href="exercises.html">Каталог</a>
+            <a href="create-workout.html">Добавить тренировку</a>
+            <a href="propose-exercise.html">Предложить упражнение</a>
+            <a href="my-proposals.html" class="active">Мои заявки</a>
+            <a href="#" id="logout-btn">Выход</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="page-title">Мои заявки на упражнения</h1>
+        <p class="page-subtitle">Здесь отображаются все ваши предложения и их текущий статус</p>
+
+        <div id="alert" class="alert alert-error"></div>
+        <div id="loading" class="page-subtitle" style="text-align:center; padding:40px 0;">Загрузка...</div>
+        <div id="empty-msg" class="page-subtitle" style="text-align:center; padding:40px 0; display:none;">
+            У вас пока нет заявок. <a href="propose-exercise.html" style="color:var(--accent);">Предложить упражнение</a>
+        </div>
+
+        <div class="grid-2" id="proposals-grid" style="gap:20px;"></div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/my-proposals.js"></script>
+</body>
+</html>

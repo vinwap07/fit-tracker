@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>Presentation</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentValidation" Version="12.1.1"/>
+        <PackageReference Include="MediatR" Version="14.1.0" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.10"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.27">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Serilog.AspNetCore" Version="10.0.0" />
+        <PackageReference Include="Serilog.Sinks.File" Version="8.0.0-nblumhardt-02322" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Application\Application.csproj" />
+      <ProjectReference Include="..\Infrastructure.DataBase.PostgreSQL\Infrastructure.DataBase.PostgreSQL.csproj" />
+      <ProjectReference Include="..\Infrastructure.ExternalSources\Infrastructure.ExternalSources.csproj" />
+      <ProjectReference Include="..\Infrastructure.FileStorage.MinIO\Infrastructure.FileStorage.MinIO.csproj" />
+      <ProjectReference Include="..\Infrastructure.Identity.Jwt\Infrastructure.Identity.Jwt.csproj" />
+      <ProjectReference Include="..\Infrastucture.Email.Smtp\Infrastucture.Email.Smtp.csproj" />
+      <ProjectReference Include="..\Infrastucture.Jobs.Hangfire\Infrastucture.Jobs.Hangfire.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Logs\" />
+    </ItemGroup>
+
+</Project>

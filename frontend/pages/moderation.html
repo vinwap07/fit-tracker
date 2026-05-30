@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitTracker — Модерация</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">FitTracker</div>
+        <div class="navbar-links">
+            <a href="profile.html">Профиль</a>
+            <a href="exercises.html">Каталог</a>
+            <a href="moderation.html" class="active">Модерация</a>
+            <a href="#" id="logout-btn">Выход</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="page-title">Модерация заявок</h1>
+        <p class="page-subtitle">Просмотрите предложенные упражнения и примите решение</p>
+
+        <div id="alert" class="alert alert-error"></div>
+        <div id="success-alert" class="alert alert-success"></div>
+        <div id="loading" class="page-subtitle" style="text-align:center; padding:40px 0;">Загрузка...</div>
+        <div id="empty-msg" class="page-subtitle" style="text-align:center; padding:40px 0; display:none;">
+            Нет заявок на рассмотрение
+        </div>
+
+        <div id="proposals-list"></div>
+    </div>
+
+    <!-- Modal for comment (reject / send-to-revision) -->
+    <div id="comment-modal" class="modal-overlay" style="display:none;">
+        <div class="card modal-card">
+            <h3 class="card-title" id="modal-title">Комментарий</h3>
+            <div class="form-group">
+                <textarea id="modal-comment" class="form-input" rows="3" placeholder="Укажите причину..."></textarea>
+            </div>
+            <div style="display:flex; gap:12px;">
+                <button class="btn btn-primary" id="modal-confirm">Подтвердить</button>
+                <button class="btn btn-secondary" id="modal-cancel">Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/moderation.js"></script>
+</body>
+</html>

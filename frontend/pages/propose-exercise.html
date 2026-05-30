@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitTracker — Предложить упражнение</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">FitTracker</div>
+        <div class="navbar-links">
+            <a href="profile.html">Профиль</a>
+            <a href="exercises.html">Каталог</a>
+            <a href="create-workout.html">Добавить тренировку</a>
+            <a href="propose-exercise.html" class="active">Предложить упражнение</a>
+            <a href="my-proposals.html">Мои заявки</a>
+            <a href="moderation.html" id="mod-link" style="display:none;">Модерация</a>
+            <a href="#" id="logout-btn">Выход</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="page-title">Предложить упражнение</h1>
+        <p class="page-subtitle">Заполните форму для добавления нового упражнения в каталог. После модерации оно станет доступно всем пользователям.</p>
+
+        <div id="alert" class="alert alert-error"></div>
+        <div id="success-alert" class="alert alert-success"></div>
+
+        <form id="propose-form">
+            <div class="card" style="margin-bottom:24px;">
+                <h3 class="card-title">Информация об упражнении</h3>
+                <div class="form-group">
+                    <label class="form-label" for="ex-name">Название</label>
+                    <input type="text" id="ex-name" class="form-input" placeholder="Жим лёжа" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="ex-description">Описание</label>
+                    <textarea id="ex-description" class="form-input" rows="4" placeholder="Подробное описание техники выполнения..." required style="resize:vertical;"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="ex-met">Метаболический эквивалент (MET)</label>
+                    <input type="number" id="ex-met" class="form-input" min="1" step="1" placeholder="5" required>
+                </div>
+            </div>
+
+            <div class="card" style="margin-bottom:24px;">
+                <h3 class="card-title">Медиафайлы</h3>
+
+                <div class="grid-3">
+                    <div class="form-group">
+                        <label class="form-label">Фото упражнения</label>
+                        <div class="file-upload" id="photo-upload">
+                            <div class="file-upload-icon">📷</div>
+                            <div class="file-upload-text">Выберите фото</div>
+                            <input type="file" id="photo-file" accept="image/*">
+                            <div class="file-upload-preview" id="photo-preview"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Видео выполнения</label>
+                        <div class="file-upload" id="perf-video-upload">
+                            <div class="file-upload-icon">🎬</div>
+                            <div class="file-upload-text">Выберите видео</div>
+                            <input type="file" id="perf-video-file" accept="video/*">
+                            <div class="file-upload-preview" id="perf-video-preview"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Видео электромиограммы</label>
+                        <div class="file-upload" id="emg-video-upload">
+                            <div class="file-upload-icon">📊</div>
+                            <div class="file-upload-text">Выберите видео</div>
+                            <input type="file" id="emg-video-file" accept="video/*">
+                            <div class="file-upload-preview" id="emg-video-preview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Отправить на модерацию</button>
+        </form>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/propose-exercise.js"></script>
+</body>
+</html>

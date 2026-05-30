@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitTracker — Каталог упражнений</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">FitTracker</div>
+        <div class="navbar-links">
+            <a href="profile.html">Профиль</a>
+            <a href="exercises.html" class="active">Каталог</a>
+            <a href="create-workout.html">Добавить тренировку</a>
+            <a href="propose-exercise.html">Предложить упражнение</a>
+            <a href="my-proposals.html">Мои заявки</a>
+            <a href="moderation.html" id="mod-link" style="display:none;">Модерация</a>
+            <a href="#" id="logout-btn">Выход</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="page-title">Каталог упражнений</h1>
+
+        <div class="search-bar">
+            <input type="text" class="form-input" id="search-input" placeholder="Поиск по названию...">
+            <button class="btn btn-primary" id="search-btn">Найти</button>
+        </div>
+
+        <div class="grid-4" id="exercises-grid">
+            <div class="loader-screen" style="grid-column: 1/-1; height: 200px;">
+                <div class="loader-spinner"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/exercises.js"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitTracker</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="loader-screen" id="loader">
+        <div class="loader-spinner"></div>
+        <p>Загрузка...</p>
+    </div>
+    <script src="js/api.js"></script>
+    <script>
+        (async () => {
+            try {
+                const user = await API.get('/api/auth/me');
+                if (user && user.email) {
+                    window.location.href = 'pages/profile.html';
+                } else {
+                    window.location.href = 'pages/auth.html';
+                }
+            } catch (e) {
+                window.location.href = 'pages/auth.html';
+            }
+        })();
+    </script>
+</body>
+</html>

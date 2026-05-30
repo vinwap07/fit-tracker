@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitTracker — Заявка</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">FitTracker</div>
+        <div class="navbar-links">
+            <a href="profile.html">Профиль</a>
+            <a href="exercises.html">Каталог</a>
+            <a href="create-workout.html">Добавить тренировку</a>
+            <a href="propose-exercise.html">Предложить упражнение</a>
+            <a href="my-proposals.html" class="active">Мои заявки</a>
+            <a href="moderation.html" id="mod-link" style="display:none;">Модерация</a>
+            <a href="#" id="logout-btn">Выход</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <a href="my-proposals.html" style="color:var(--accent); text-decoration:none; font-size:0.9rem;">← Назад к заявкам</a>
+
+        <div id="alert" class="alert alert-error" style="margin-top:16px;"></div>
+        <div id="loading" class="page-subtitle" style="text-align:center; padding:40px 0;">Загрузка...</div>
+
+        <div id="detail" style="display:none; margin-top:24px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
+                <h1 class="page-title" style="margin:0;" id="p-name"></h1>
+                <span id="p-status" class="proposal-badge"></span>
+            </div>
+
+            <div class="grid-3" style="gap:20px;">
+                <div class="card" id="photo-card" style="display:none;">
+                    <h3 class="card-title">Фото</h3>
+                    <img id="p-photo" style="max-width:100%; border-radius:8px;" alt="photo">
+                </div>
+                <div class="card" id="perf-card" style="display:none;">
+                    <h3 class="card-title">Видео выполнения</h3>
+                    <video id="p-perf" controls style="max-width:100%; border-radius:8px;"></video>
+                </div>
+                <div class="card" id="emg-card" style="display:none;">
+                    <h3 class="card-title">Видео ЭМГ</h3>
+                    <video id="p-emg" controls style="max-width:100%; border-radius:8px;"></video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script>
+    const STATUS_MAP = {
+        0: { label: 'На рассмотрении', cls: 'badge-pending' },
+        1: { label: 'Одобрено', cls: 'badge-approved' },
+        2: { label: 'Отклонено', cls: 'badge-rejected' },
+        3: { label: 'На доработке', cls: 'badge-revision' },
+        Pending:       { label: 'На рассмотрении', cls: 'badge-pending' },
+        Approved:      { label: 'Одобрено', cls: 'badge-approved' },
+        Rejected:      { label: 'Отклонено', cls: 'badge-rejected' },
+        NeedsRevision: { label: 'На доработке', cls: 'badge-revision' },
+    };
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        document.getElementById('logout-btn').addEventListener('click', async (e) => {
+            e.preventDefault();
+            try { await API.post('/api/auth/logout', { token: '' }); } catch (_) {}
+            window.location.href = 'auth.html';
+        });
+
+        const id = new URLSearchParams(window.location.search).get('id');
+        if (!id) { showErr('ID заявки не указан'); return; }
+
+        try {
+            const d = await API.get(`/api/exerciseproposal/${id}`);
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('detail').style.display = 'block';
+
+            document.getElementById('p-name').textContent = d.name;
+            const s = STATUS_MAP[d.status] || { label: d.status, cls: '' };
+            const badge = document.getElementById('p-status');
+            badge.textContent = s.label;
+            badge.className = 'proposal-badge ' + s.cls;
+
+            if (d.photoUrl) {
+                document.getElementById('p-photo').src = d.photoUrl;
+                document.getElementById('photo-card').style.display = '';
+            }
+            if (d.performanceVideoUrl) {
+                document.getElementById('p-perf').src = d.performanceVideoUrl;
+                document.getElementById('perf-card').style.display = '';
+            }
+            if (d.emgVideoUrl) {
+                document.getElementById('p-emg').src = d.emgVideoUrl;
+                document.getElementById('emg-card').style.display = '';
+            }
+        } catch (err) {
+            showErr(err.message || 'Ошибка загрузки');
+        }
+    });
+
+    function showErr(msg) {
+        document.getElementById('loading').style.display = 'none';
+        const el = document.getElementById('alert');
+        el.textContent = msg;
+        el.classList.add('show');
+    }
+    </script>
+</body>
+</html>
